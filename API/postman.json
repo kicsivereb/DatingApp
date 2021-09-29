@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "62534b7a-4779-417e-80d3-9f2e2865cd55",
+		"name": "DatingApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth Login - Sets Token Variable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e24d8330-1697-4df4-a18a-91307bf6293e",
+						"type": "text/javascript",
+						"exec": [
+							"// set the environment \"token\" variable to the token returned from the login api",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if(pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"token\", jsonData.tokenString);",
+							"    pm.environment.set(\"currentUserId\", jsonData.user.id);",
+							"}",
+							"//console.log(pm.environment.get(\"token\"));",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"{{user1}}\",\n  \"password\": \"{{password1}}\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Login"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth User Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e24d8330-1697-4df4-a18a-91307bf6293e",
+						"type": "text/javascript",
+						"exec": [
+							"// set the environment \"token\" variable to the token returned from the login api",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if(pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"token\", jsonData.tokenString);",
+							"    pm.environment.set(\"currentUserId\", jsonData.user.id);",
+							"}",
+							"//console.log(pm.environment.get(\"token\"));",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"{{user1}}\",\n  \"password\": \"{{password1}}\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Register"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "aae83c35-1aaa-461e-8f8b-30a2e870596a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c041e122-c72d-4730-9537-9ffc052911a2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"John\",\n  \"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/users/{{currentUserId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{currentUserId}}"
+					]
+				},
+				"description": "GetUsers"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "aae83c35-1aaa-461e-8f8b-30a2e870596a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c041e122-c72d-4730-9537-9ffc052911a2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"John\",\n  \"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/users?pageNumber=2&pageSize=3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "2"
+						},
+						{
+							"key": "pageSize",
+							"value": "3"
+						}
+					]
+				},
+				"description": "GetUsers"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60b398c4-1218-4695-a098-3dc7751dab4a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"introduction\":\"updated introduction\",\n  \"interests\":\"updated interests\",\n  \"lookingFor\":\"Updated lookingfor\",\n  \"city\":\"Updated city\",\n  \"country\": \"updated country\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/users/3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"3"
+					]
+				},
+				"description": "UpdateUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Photo For User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "File",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/users/3/photos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"3",
+						"photos"
+					]
+				},
+				"description": "AddPhotoForUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Set Main Photo",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"gender\":\"male\",\n  \"username\":\"Bob\",\n  \"knownAs\":\"Bobby\",\n  \"dateOfBirth\":\"10/21/1995\",\n  \"city\":\"London\",\n  \"country\":\"UK\",\n  \"password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/users/{{currentUserId}}/photos/11/setmain",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{currentUserId}}",
+						"photos",
+						"11",
+						"setmain"
+					]
+				},
+				"description": "SetMainPhoto"
+			},
+			"response": []
+		},
+		{
+			"name": "Like User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/users/{{currentUserId}}/like/7",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{currentUserId}}",
+						"like",
+						"7"
+					]
+				},
+				"description": "LikeUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"recipientId\": {{user1}},\n  \"content\": \"Test message from Boyer to Freda. Screw you beotch!\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/users/{{currentUserId}}/messages",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{currentUserId}}",
+						"messages"
+					]
+				},
+				"description": "CreateMessage"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Messages For User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/users/{{currentUserId}}/messages?MessageContainer=Outbox",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{currentUserId}}",
+						"messages"
+					],
+					"query": [
+						{
+							"key": "MessageContainer",
+							"value": "Outbox"
+						}
+					]
+				},
+				"description": "GetMessagesForUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Message Thread",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/users/{{currentUserId}}/messages/thread/3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{currentUserId}}",
+						"messages",
+						"thread",
+						"3"
+					]
+				},
+				"description": "GetMessageThread"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Photo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/api/users/{{currentUserId}}/photos/11",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{currentUserId}}",
+						"photos",
+						"11"
+					]
+				},
+				"description": "SetMainPhoto"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9c7f67b5-4311-4601-a0f8-cd1c81e15f2a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "05ee2ba9-9d45-48b8-bc48-7c95513cf3fd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
