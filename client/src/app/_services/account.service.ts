@@ -15,9 +15,12 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
-  login(model: any) {
-    return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
-      map((response: User) => {
+  login(model: any): Observable<void> {
+    const postObservable: Observable<User> = 
+      this.http.post<User>(this.baseUrl + 'account/login', model);
+
+    const resultObservable: Observable<void> = postObservable.pipe(
+      map((response: User): void => {
         const user = response;
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
@@ -25,6 +28,12 @@ export class AccountService {
         }
       })
     );
+
+    return resultObservable;
+  }
+
+  addTwoNumbers(a: number, b: number): number {
+    return a + b;
   }
 
   register(model: any): Observable<void> {

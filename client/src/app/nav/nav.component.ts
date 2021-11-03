@@ -20,9 +20,11 @@ export class NavComponent {
   ) {}
 
   login() {
-    this.accountService.login(this.model).subscribe((response) => {
+    const resultObservable = this.accountService.login(this.model);
+
+    resultObservable.subscribe(() => {
       this.router.navigateByUrl('/members');
-    })
+    });
   }
 
   logout() {
