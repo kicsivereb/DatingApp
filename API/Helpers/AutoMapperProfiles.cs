@@ -27,6 +27,7 @@ namespace API.Helpers
                     )
                 );
             CreateMap<Photo, PhotoDto>();
+            CreateMap<MemberUpdateDto, AppUser>();
         }
 
         private void ForMember(Func<object, object> p1, Func<object, object> p2)
