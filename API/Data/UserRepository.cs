@@ -43,9 +43,14 @@ namespace API.Data
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
-            return await Context.Users
+            AppUser user = await Context.Users
+                .Where(x => x.UserName == username)
                 .Include(p => p.Photos)
-                .SingleOrDefaultAsync(x => x.UserName == username);
+                .FirstOrDefaultAsync();
+
+            // SELECT * FROM User u WHERE UserName LIKE 'lena' INNER JOIN Photos p ON u.Id = p.UserId
+
+            return user;
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()

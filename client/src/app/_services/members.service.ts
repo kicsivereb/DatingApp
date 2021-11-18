@@ -37,6 +37,22 @@ export class MembersService {
       map(() => {
         const index = this.members.indexOf(member);
         this.members[index] = member;
-    }));
+      })
+    );
+  }
+
+  setMainPhoto(photoId: number): Observable<void> {
+    // "PUT https://localhost:5001/api/users/set-main-photo/21"
+    // [HttpPut("set-main-photo/{photoId}")]
+    const requestObs$ = this.http.put<void>(
+      this.baseUrl + 'users/set-main-photo/' + photoId,
+      {}
+    );
+    return requestObs$;
+  }
+
+  deletePhoto(photoId: number) 
+  {
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 }
